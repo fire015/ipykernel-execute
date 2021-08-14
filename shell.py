@@ -3,16 +3,18 @@
 from jupyter_client import manager
 from subprocess import STDOUT
 from time import time
+import os
 
 STARTUP_TIMEOUT = 60
 TIMEOUT = 60
 
+os.environ["JUPYTER_PATH"] = os.getcwd()
 
 def start_new_kernel(**kwargs):
     #kwargs['stderr'] = STDOUT
     #kwargs['stdout'] = STDOUT
 
-    return manager.start_new_kernel(startup_timeout=STARTUP_TIMEOUT, **kwargs)
+    return manager.start_new_kernel(startup_timeout=STARTUP_TIMEOUT, kernel_name="rms", **kwargs)
 
 def get_reply(kc, msg_id, timeout=TIMEOUT, channel='shell'):
     t0 = time()
@@ -60,11 +62,15 @@ def execute(code='', kc=None, **kwargs):
 
 
 
-with open('test.py') as f:
-    code = f.read()
+# with open('test.py') as f:
+#     code = f.read()
 
 km, kc = start_new_kernel()
-msg_id, content = execute(code=code, kc=kc)
+msg_id, content = execute(code="from flask import Flask", kc=kc)
+stdout, stderr = assemble_output(kc.get_iopub_msg)
+print(content)
+#print(stdout)
+msg_id, content = execute(code="app = Flask('test'); print(app)", kc=kc)
 stdout, stderr = assemble_output(kc.get_iopub_msg)
 print(content)
 print(stdout)
