@@ -1,4 +1,5 @@
 # pip install ipykernel
+# Source from https://github.com/ipython/ipykernel/blob/master/ipykernel/tests/test_kernel.py
 
 from jupyter_client import manager
 from subprocess import STDOUT
