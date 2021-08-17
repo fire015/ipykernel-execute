@@ -1,5 +1,0 @@
-{
-  "argv": ["rms-kernel/bin/python", "-m", "ipykernel_launcher", "-f", "{connection_file}"],
-  "display_name": "rms",
-  "language": "python"
-}

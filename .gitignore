@@ -1,2 +1,5 @@
 .env
-/rms-kernel
+/example-kernel
+__pycache__/
+*.py[cod]
+*.egg-info/
