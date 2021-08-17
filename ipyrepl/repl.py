@@ -10,4 +10,7 @@ def execute(code):
         msg_id, content = kernel.execute(kc=kc, code=code)
         stdout, stderr = kernel.assemble_output(kc.get_iopub_msg)
 
-    return content, stdout
+        if content['status'] == 'error':
+            stderr = content['traceback']
+
+    return content, stdout, stderr

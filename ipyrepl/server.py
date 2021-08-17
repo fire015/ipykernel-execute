@@ -7,9 +7,9 @@ app = Flask(__name__)
 @app.route('/execute', methods=['POST'])
 def execute_code():
     code = req.form['code']
-    content, stdout = repl.execute(code)
+    content, stdout, stderr = repl.execute(code)
 
-    return jsonify({'content': content, 'stdout': stdout.rstrip()})
+    return jsonify({'content': content, 'stdout': stdout.rstrip(), 'stderr': stderr})
 
 
 def start():
